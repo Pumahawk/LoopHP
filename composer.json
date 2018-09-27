@@ -1,0 +1,11 @@
+{
+    "name": "pumahawk/loophp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lorenzo Gandino",
+            "email": "lorenzoga94@gmail.com"
+        }
+    ],
+    "require": {}
+}
