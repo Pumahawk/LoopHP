@@ -14,5 +14,10 @@
         "symfony/routing": "^4.1",
         "symfony/http-foundation": "^4.1"
     },
-    "require-dev": {}
+    "require-dev": {},
+    "autoload": {
+      "psr-4": {
+        "LoopHP\\": "bin/src/"
+      }
+    }
 }
