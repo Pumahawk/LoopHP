@@ -4,36 +4,21 @@ namespace LoopHP\Config\Loader;
 
 use Symfony\Component\Config\Loader\FileLoader;
 use Symfony\Component\Yaml\Yaml;
+use LoopHP\Config\Router\RouterKit;
 
 class YamlRouterLoader extends FileLoader {
 
   public function load($resource, $type = null) {
+    $routerKit = new RouterKit();
     $data = Yaml::parse(file_get_contents($this -> locator -> locate($resource)));
-    $data = $this -> normalize($data);
+    $data = $routerKit -> normalize($data);
     return $data;
   }
   public function supports($resource, $type = null) {
-    return is_string($resource) && 'yaml' === pathinfo(
-      $resource,
-      PATHINFO_EXTENSION
-    );
-  }
-  public function normalize(array $data, string $pattern = '') : array {
-    // TODO Add Link functionlity
-    $finalData = array();
-    foreach ($data as $key => $record) {
-      if($record['type'] != 'address') {
-        if($record['type'] == 'group') {
-          foreach($this -> normalize($record['data'], $pattern.$record['pattern']) as $val) {
-            $finalData[] = $val;
-          }
-        }
-      } else {
-        $data[$key]['pattern'] = $pattern.$record['pattern'];
-        $finalData[] = $data[$key];
-      }
-    }
-
-    return $finalData;
+    $routerKit = new RouterKit();
+    $pathinfo = pathinfo($resource);
+    $ext1 = $pathinfo['extension'];
+    $ext2 = pathinfo($pathinfo['filename'], PATHINFO_EXTENSION);
+    return is_string($resource) && 'yaml' === $ext1 && 'route' === $ext2;
   }
 }
