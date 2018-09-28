@@ -21,7 +21,7 @@ class AppConfiguration {
     return $this -> pathConfigDirectory;
   }
 
-  public function chetConfigRouterDirectory() : string {
+  public function getConfigRouterDirectory() : string {
     return $this -> pathConfigRouterDirectory;
   }
 }
