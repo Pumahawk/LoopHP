@@ -2,7 +2,7 @@
 
 namespace LoopHP;
 
-abstract class AppConfiguration {
+class AppConfiguration {
   protected $basePath;
   protected $pathConfigDirectory;
   protected $pathConfigRouterDirectory;
