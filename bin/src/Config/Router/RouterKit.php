@@ -2,23 +2,26 @@
 
 namespace LoopHP\Config\Router;
 
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
+
 class RouterKit {
-  public function normalize(array $data, string $pattern = '') : array {
+  public function normalize(array $data, string $prefix = '') :  RouteCollection {
     // TODO Add Link functionality
-    $finalData = array();
+    $routes = new RouteCollection();
     foreach ($data as $key => $record) {
       if($record['type'] != 'address') {
         if($record['type'] == 'group') {
-          foreach($this -> normalize($record['data'], $pattern.$record['pattern']) as $val) {
-            $finalData[] = $val;
-          }
+          $routes -> addCollection($this -> normalize($record['data'], $record['pattern']));
         }
       } else {
-        $data[$key]['pattern'] = $pattern.$record['pattern'];
-        $finalData[] = $data[$key];
+        $route = new Route($record['pattern'], $record['data']);
+        $routes -> add($record['name'], $route);
       }
     }
-
-    return $finalData;
+    $routes -> addPrefix($prefix);
+    return $routes;
   }
 }
