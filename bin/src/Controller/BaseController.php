@@ -2,6 +2,20 @@
 
 namespace LoopHP\Controller;
 
-abstract class BaseController {
+use Symfony\Component\Templating\EngineInterface;
 
+abstract class BaseController {
+  private $tEngine;
+
+  public function __construct(EngineInterface $templateEngine) {
+    $this -> setTemplateEngine($templateEngine);
+  }
+
+  public function setTemplateEngine(EngineInterface $templateEngine) {
+    $this -> tEngine = $templateEngine;
+  }
+
+  public function tEngine() : EngineInterface {
+    return $this -> tEngine;
+  }
 }
