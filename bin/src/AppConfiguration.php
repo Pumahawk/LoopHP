@@ -2,26 +2,64 @@
 
 namespace LoopHP;
 
-class AppConfiguration {
-  protected $basePath;
-  protected $pathConfigDirectory;
-  protected $pathConfigRouterDirectory;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\Processor;
 
-  public function __construct(string $basePath) {
-    $this -> basePath = $basePath;
-    $this -> pathConfigDirectory = $basePath.'/config';
-    $this -> pathConfigRouterDirectory = $basePath.'/config/router';
+class AppConfiguration  implements ConfigurationInterface {
+  protected $configuration;
+
+  public function getConfiguration() : array{
+    return $this -> configuration;
+  }
+  public function setConfiguration(array $configuration) {
+    $processor = new Processor();
+    $this -> configuration = $processor->processConfiguration(
+        $this,
+        $configuration
+    );
   }
 
-  public function getBasePath() : string {
-    return $this -> basePath;
+  public function __construct(array $configuration) {
+    $this -> setConfiguration($configuration);
   }
 
-  public function getPathConfigDirectory() : string {
-    return $this -> pathConfigDirectory;
-  }
+  public function getConfigTreeBuilder() {
+    $treeBuilder = new TreeBuilder();
+    $rootNode = $treeBuilder->root('app');
 
-  public function getConfigRouterDirectory() : string {
-    return $this -> pathConfigRouterDirectory;
+    $rootNode
+    -> children()
+      -> arrayNode('paths')
+        -> children()
+          -> arrayNode('configurations')
+            -> children()
+              -> scalarNode('configuration') -> end()
+              -> scalarNode('router') -> end()
+            -> end()
+          -> end()
+          -> arrayNode('resources')
+            -> children()
+              -> arrayNode('template')
+                -> scalarPrototype() -> end()
+              -> end()
+            -> end()
+          -> end()
+          -> arrayNode('source_code')
+            -> children()
+              -> arrayNode('controller')
+                -> scalarPrototype() -> end()
+              -> end()
+              -> arrayNode('api')
+                -> scalarPrototype() -> end()
+              -> end()
+            -> end()
+          -> end()
+        -> end()
+      -> end();
+
+
+
+    return $treeBuilder;
   }
 }
