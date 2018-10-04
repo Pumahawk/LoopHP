@@ -99,7 +99,7 @@ final class RouterConfigurationTest extends TestCase
         ]
       ]];
 
-      //Configuration 3
+      //Configuration 4
       $configurationList[] = [[
         'router' => [
           [

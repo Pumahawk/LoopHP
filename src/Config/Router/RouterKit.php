@@ -11,17 +11,18 @@ class RouterKit {
   public function normalize(array $data, string $prefix = '') :  RouteCollection {
     // TODO Add Link functionality
     $routes = new RouteCollection();
+    $data = $data['router'] ?? $data;
     foreach ($data as $key => $record) {
-      if($record['type'] != 'address') {
-        if($record['type'] == 'group') {
-          $routes -> addCollection($this -> normalize($record['data'], $record['pattern']));
-        }
+      if(isset($record['address'])) {
+        $newCollection = $this -> normalize($record['address'], $record['pattern']);
+        $newCollection -> addNamePrefix($record['name'].'.');
+        $routes -> addCollection($newCollection);
       } else {
         $route = new Route($record['pattern'], $record['data']);
         $routes -> add($record['name'], $route);
       }
+      $routes -> addPrefix($prefix);
     }
-    $routes -> addPrefix($prefix);
     return $routes;
   }
 }
