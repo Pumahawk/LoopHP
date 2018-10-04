@@ -1,6 +1,0 @@
-- type: address
-  pattern: /demo1.html
-  data: Demo@demo1
-- type: address
-  pattern: /demo2.html
-  data: Demo@demo2

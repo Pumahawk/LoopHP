@@ -19,7 +19,7 @@ class App {
   protected $configuration;
   protected $context;
 
-  public function __construct(AppConfiguration $configuration, string $match, $context) {
+  public function __construct(AppConfiguration $configuration, $context) {
     $this -> configuration = $configuration;
     $this -> context = $context;
     $this -> match = $match;
@@ -33,25 +33,14 @@ class App {
     return $this -> configuration;
   }
 
-  function start(){ // TODO  da migliorare
-    $configFileLocator = new FileLocator(array($this -> configuration -> getConfigRouterDirectory()));
-    $loader = new DelegatingLoader(new LoaderResolver(array(
-      new YamlRouterLoader($configFileLocator),
-      new PhpRouterLoader($configFileLocator)
-    )));
-
-    $routes = $loader -> import('base.route.yaml');
-
-    $match = new UrlMatcher($routes, $this -> context);
-    $this -> controllerExecution($match -> match($this -> match));
-
+  public function process(strign $request){
+    $this -> init();
   }
 
-  function controllerExecution($data) { // TODO da migliorare
-    $action = explode('@', $data['controller']);
-    $controller = 'LoopHP\\App\\Controller\\'.$action[0].'Controller';
-    $pr = $action[1].'Action';
-    $totalController = $controller.'::'.$pr;
-    $totalController();
+  public function init() {
+    //init loader application
+  }
+
+  public function controllerExecution($data) {
   }
 }
