@@ -8,6 +8,7 @@ use Symfony\Component\Config\Definition\Processor;
 final class RouterConfigurationTest extends TestCase
 {
     /**
+    * @group router
     * @dataProvider routerValidConfigurationList
     * @doesNotPerformAssertions
     */
