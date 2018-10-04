@@ -26,6 +26,7 @@ final class RouterConfigurationTest extends TestCase
         'router' => [
           [
             'pattern' => 'pattern',
+            'name' => 'name',
             'data' => [
               'controller' => 'controller'
             ]
@@ -38,12 +39,14 @@ final class RouterConfigurationTest extends TestCase
         'router' => [
           [
             'pattern' => 'pattern',
+            'name' => 'name',
             'data' => [
               'controller' => 'controller'
             ]
           ],
           [
             'pattern' => 'pattern',
+            'name' => 'name',
             'data' => [
               'controller' => 'controller'
             ]
@@ -56,9 +59,11 @@ final class RouterConfigurationTest extends TestCase
         'router' => [
           [
             'pattern' => 'pattern',
+            'name' => 'name',
             'address' => [
               [
                 'pattern' => 'pattern',
+                'name' => 'name',
                 'data' => [
                   'controller' => 'controller'
                 ]
@@ -73,12 +78,15 @@ final class RouterConfigurationTest extends TestCase
         'router' => [
           [
             'pattern' => 'pattern',
+            'name' => 'name',
             'address' => [
               [
                 'pattern' => 'pattern',
+                'name' => 'name',
                 'address' => [
                   [
                     'pattern' => 'pattern',
+                    'name' => 'name',
                     'data' => [
                       'controller' => 'controller'
                     ]
@@ -95,18 +103,22 @@ final class RouterConfigurationTest extends TestCase
         'router' => [
           [
             'pattern' => 'pattern',
+            'name' => 'name',
             'address' => [
               [
                 'pattern' => 'pattern',
+                'name' => 'name',
                 'address' => [
                   [
                     'pattern' => 'pattern',
+                    'name' => 'name',
                     'data' => [
                       'controller' => 'controller'
                     ]
                   ],
                   [
                     'pattern' => 'pattern',
+                    'name' => 'name',
                     'data' => [
                       'controller' => 'controller'
                     ]

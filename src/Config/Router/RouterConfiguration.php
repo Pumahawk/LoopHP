@@ -22,6 +22,7 @@ class RouterConfiguration  implements ConfigurationInterface {
     $addressNode
       -> arrayPrototype()
         -> append($patternNode)
+        -> append(new ScalarNodeDefinition('name'))
         -> append($dataNode)
         -> children()
           -> variableNode('address')
@@ -36,6 +37,7 @@ class RouterConfiguration  implements ConfigurationInterface {
 
     $treeBuilder -> root('router') -> arrayPrototype()
     -> append($patternNode)
+    -> append(new ScalarNodeDefinition('name'))
     -> append($dataNode)
     -> append($addressNode);
     return $treeBuilder;
