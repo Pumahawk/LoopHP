@@ -1,5 +1,7 @@
 <?php
 declare(strict_types=1);
+namespace LoopHP\Test\Config\Router;
+
 
 use PHPUnit\Framework\TestCase;
 use LoopHP\Config\Router\RouterKit;
@@ -119,6 +121,44 @@ final class RouterKitTest extends TestCase {
                   [
                     'name' => 'route',
                     'pattern' => '/path',
+                    'data' => [
+                      'controller' => ''
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ];
+
+    // Collection 4
+    $data[] = [
+      [
+        ['name' => 'group.group1.route', 'path' => '/path/group/path'],
+        ['name' => 'group.group1.route1', 'path' => '/path/group/path1']
+      ],
+      [
+        'router' => [
+          [
+            'name' => 'group',
+            'pattern' => '/path',
+            'address' => [
+              [
+                'name' => 'group1',
+                'pattern' => '/group',
+                'address' => [
+                  [
+                    'name' => 'route',
+                    'pattern' => '/path',
+                    'data' => [
+                      'controller' => ''
+                    ]
+                  ],
+                  [
+                    'name' => 'route1',
+                    'pattern' => '/path1',
                     'data' => [
                       'controller' => ''
                     ]

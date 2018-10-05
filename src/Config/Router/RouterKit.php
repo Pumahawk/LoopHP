@@ -21,8 +21,8 @@ class RouterKit {
         $route = new Route($record['pattern'], $record['data']);
         $routes -> add($record['name'], $route);
       }
-      $routes -> addPrefix($prefix);
     }
+    $routes -> addPrefix($prefix);
     return $routes;
   }
 }
