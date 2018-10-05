@@ -8,17 +8,14 @@ use Symfony\Component\Yaml\Yaml;
 use LoopHP\Config\Router\RouterKit;
 use LoopHP\Config\Router\RouterConfiguration;
 
-class YamlRouterLoader extends FileLoader {
+class YamlRouterLoader extends RouterLoader {
 
   public function load($resource, $type = null) {
     return $this -> processConfiguration(file_get_contents($this -> locator -> locate($resource)));
   }
   public function processYamlRouterConfiguration(string $yamlText) {
-    $process = new Processor();
-    $routerKit = new RouterKit();
     $data = Yaml::parse($yamlText);
-    $process -> processConfiguration(new RouterConfiguration(), $data);
-    $data = $routerKit -> normalize($data);
+    $data = $this -> processRouterConfiguration($data);
     return $data;
   }
   public function supports($resource, $type = null) {
