@@ -13,16 +13,15 @@ use LoopHP\Config\Loader\PhpRouterLoader;
 
 use Symfony\Component\Routing\Route;
 
-
+// TODO App da testare
 class App {
-  protected $match;
   protected $configuration;
-  protected $context;
+  protected $controllable;
+  protected $routeCollection;
 
-  public function __construct(AppConfiguration $configuration, $context) {
+  public function __construct(AppConfiguration $configuration, ControllableInterface $controllable) {
     $this -> configuration = $configuration;
-    $this -> context = $context;
-    $this -> match = $match;
+    $this -> controllable = $controllable;
   }
 
   public function setConfiguration(AppConfiguration $configuration) {
@@ -33,14 +32,43 @@ class App {
     return $this -> configuration;
   }
 
-  public function process(strign $request){
-    $this -> init();
+  public function controllerExecution(array $data) {
+    // TODO
   }
 
-  public function init() {
-    //init loader application
+  public function match() {
+    return $this -> controllable -> getController($this -> routeCollection);
   }
 
-  public function controllerExecution($data) {
+  public function run() {
+    $this -> setComposerAutorun();
+    $this -> loadRouteCollection();
+
+    $data = $this -> match();
+    $this -> controllerExecution($data);
+  }
+
+  public function setComposerAutorun() { //TODO test
+    $cd = $configuration -> getConfigurationDefinition();
+    $api = $cd -> getApi();
+
+    foreach ($api as $a) {
+      $cd -> getComposerObject() -> addPsr4('LoopHP\\Api\\', $a);
+    }
+  }
+
+  public function loadRouteCollection() {
+    $cd = $configuration -> getConfigurationDefinition();
+    $path = $cd -> getRouterPath();
+    $fl = new FileLocator($path);
+
+    $loaderResolver = new LoaderResolver(
+      array(
+        new YamlRouterLoader($fileLocator),
+        new PhpRouterLoader($fileLocator)
+      )
+    );
+    $delegatingLoader = new DelegatingLoader($loaderResolver);
+    $this -> routeCollection = $delegatingLoader -> load('base.router.yaml');
   }
 }

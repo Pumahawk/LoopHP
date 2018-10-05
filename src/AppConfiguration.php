@@ -8,6 +8,7 @@ use Symfony\Component\Config\Definition\Processor;
 
 class AppConfiguration  implements ConfigurationInterface {
   protected $configuration;
+  protected $composerObject;
 
   public function getConfiguration() : array{
     return $this -> configuration;
@@ -20,8 +21,22 @@ class AppConfiguration  implements ConfigurationInterface {
     );
   }
 
-  public function __construct(array $configuration) {
+  public function getConfigurationDefinition() {
+    $cd = new AppConfigurationDefinition();
+    $cd -> setConfiguration($this -> configuration);
+    return $cd;
+  }
+
+  public function setComposerObject($composerObject){
+    $this -> composerObject = $composerObject;
+  }
+  public function getComposerObject() {
+    return $this -> composerObject;
+  }
+
+  public function __construct(array $configuration, $composerObject = null) {
     $this -> setConfiguration($configuration);
+    $this -> setComposerObject($composerObject);
   }
 
   public function getConfigTreeBuilder() {
@@ -56,7 +71,9 @@ class AppConfiguration  implements ConfigurationInterface {
             -> end()
           -> end()
         -> end()
-      -> end();
+      -> end()
+      -> variableNode('composer') -> end()
+    -> end();
 
 
 

@@ -56,7 +56,8 @@ class AppConfigurationDefinitionTest extends TestCase {
               'path/to/api1'
             ]
           ]
-        ]
+        ],
+        'composer' => null
       ]
     ];
 

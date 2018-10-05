@@ -20,13 +20,17 @@ class AppConfigurationDefinition {
             'controller' => [],
             'api' => []
           ]
-        ]
+        ],
+        'composer' => null
       ]
     ];
   }
-public function getConfiguration() {
-  return $this -> configuration;
-}
+  public function getConfiguration() {
+    return $this -> configuration;
+  }
+  public function setConfiguration(array $configuration) {
+    $this -> configuration = $configuration;
+  }
   public function getAppConfiguration(){
     return new AppConfiguration($this -> configuration);
   }
@@ -61,5 +65,12 @@ public function getConfiguration() {
   }
   public function getApi() {
     return $this -> configuration['app']['path']['source_code']['api'];
+  }
+  public function setComposerObject(object $composer) {
+    $this -> configuration['app']['composer'] = $composer;
+    return $this;
+  }
+  public function getComposerObject() {
+    return $this -> configuration['app']['composer'];
   }
 }
