@@ -62,4 +62,19 @@ class AppConfigurationDefinitionTest extends TestCase {
 
     $this -> assertEquals($expected, $appCongDef -> getConfiguration());
   }
+
+  /**
+  * @depends testSetMethods
+  * @doesNotPerformAssertions
+  */
+  public function testGetAppConfigurationObject() {
+    $appCongDef = new AppConfigurationDefinition();
+    $appCongDef
+      -> setConfigurationPath('path/to/configurations')
+      -> setRouterPath('path/to/router')
+      -> addTemplate('path/to/template')
+      -> addController('path/to/controller')
+      -> addApi('path/to/api');
+    $appCongDef -> getAppConfiguration();
+  }
 }
