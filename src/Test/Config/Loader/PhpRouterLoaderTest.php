@@ -122,27 +122,38 @@ class PhpRouterLoaderTest extends TestCase {
       ],
       $php
     ];
-/*
+
     //Configurazione 4
-    $php = <<<YAML
-router:
-  - name: group0
-    pattern: /grouppath0
-    address:
-      - name: group1
-        pattern: /grouppath1
-        address:
-        - name: route0
-          pattern: /path0
-          data:
-            controller: controller
-        - name: route1
-          pattern: /path1
-          data:
-            controller: controller
-
-
-YAML;
+    $php = [
+      'router' => [
+        [
+          'name' => 'group0',
+          'pattern' => '/grouppath0',
+          'address' => [
+            [
+              'name' => 'group1',
+              'pattern' => '/grouppath1',
+              'address' => [
+                [
+                  'name' => 'route0',
+                  'pattern' => '/path0',
+                  'data' => [
+                    'controller' => 'controller'
+                  ]
+                ],
+                [
+                  'name' => 'route1',
+                  'pattern' => '/path1',
+                  'data' => [
+                    'controller' => 'controller'
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ];
     $phpText[] = [
       [
         ['name' => 'group0.group1.route0', 'path' => '/grouppath0/grouppath1/path0'],
@@ -150,7 +161,7 @@ YAML;
       ],
       $php
     ];
-*/
+    
     return $phpText;
   }
 }
