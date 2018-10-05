@@ -11,7 +11,7 @@ use LoopHP\Config\Router\RouterConfiguration;
 class YamlRouterLoader extends RouterLoader {
 
   public function load($resource, $type = null) {
-    return $this -> processConfiguration(file_get_contents($this -> locator -> locate($resource)));
+    return $this -> processYamlRouterConfiguration(file_get_contents($this -> locator -> locate($resource)));
   }
   public function processYamlRouterConfiguration(string $yamlText) {
     $data = Yaml::parse($yamlText);
