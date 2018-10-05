@@ -9,7 +9,7 @@ class PHPRouterLoader extends RouterLoader {
 
   public function load($resource, $type = null) {
     $data = require($this -> locator -> locate($resource));
-    return $this -> processPhpRouterConfiguration($data)
+    return $this -> processPhpRouterConfiguration($data);
   }
 
   public function processPhpRouterConfiguration(array $data) {
