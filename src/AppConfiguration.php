@@ -1,6 +1,7 @@
 <?php
 
 namespace LoopHP;
+use Composer\Autoload\ClassLoader;
 
 class AppConfiguration {
   protected $configuration;
@@ -18,42 +19,42 @@ class AppConfiguration {
       ]
     ];
   }
-  public function getConfiguration() {
+  public function getConfiguration() : array {
     return $this -> configuration;
   }
   public function addConfigurationPath(string $path) {
     $this -> configuration['app']['paths']['configurations'][] = $path;
     return $this;
   }
-  public function getConfigurationPath() {
+  public function getConfigurationPath() : array {
     return $this -> configuration['app']['paths']['configurations'];
   }
   public function addController(string $path) {
     $this -> configuration['app']['paths']['controller'][] = $path;
     return $this;
   }
-  public function getController() {
+  public function getController() : array {
     return $this -> configuration['app']['paths']['controller'];
   }
   public function addTemplate(string $path) {
     $this -> configuration['app']['paths']['template'][] = $path;
     return $this;
   }
-  public function getTemplate() {
+  public function getTemplate() : array {
     return $this -> configuration['app']['paths']['template'];
   }
   public function addApi(string $path) {
     $this -> configuration['app']['paths']['api'][] = $path;
     return $this;
   }
-  public function getApi() {
+  public function getApi() : array {
     return $this -> configuration['app']['paths']['api'];
   }
-  public function setComposer(\Composer\Autoload\ClassLoader $composer) {
+  public function setComposer(ClassLoader $composer) {
     $this -> configuration['app']['composer'] = $composer;
     return $this;
   }
-  public function getComposer() {
+  public function getComposer() : ClassLoader {
     return $this -> configuration['app']['composer'];
   }
 }

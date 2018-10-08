@@ -10,14 +10,14 @@ class ControllerData {
     $this -> controller = $controller;
     $this -> data = $data;
   }
-  public function getController() {
+  public function getController() : string {
     return $this -> controller;
   }
   public function setController(string $controller) {
     $this -> controller = $controller;
     return $this;
   }
-  public function getData() {
+  public function getData() : array {
     return $this -> data;
   }
   public function setData(array $data) {
