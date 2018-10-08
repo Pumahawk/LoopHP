@@ -4,10 +4,12 @@ namespace LoopHP;
 
 class ControllerData {
   protected $controller;
+  protected $method;
   protected $data;
 
-  public function __construct(string $controller = '', array $data = array()) {
+  public function __construct(string $controller = '', string $method = '', array $data = array()) {
     $this -> controller = $controller;
+    $this -> method = $method;
     $this -> data = $data;
   }
   public function getController() : string {
@@ -15,6 +17,13 @@ class ControllerData {
   }
   public function setController(string $controller) {
     $this -> controller = $controller;
+    return $this;
+  }
+  public function getMethod() : string {
+    return $this -> method;
+  }
+  public function setMethod(string $method) {
+    $this -> method = $method;
     return $this;
   }
   public function getData() : array {

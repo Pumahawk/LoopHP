@@ -8,14 +8,15 @@ use LoopHP\ControllerData;
 class ControllerDataTest extends TestCase {
   public function testConstruct() {
     $cd = new ControllerData(
-      'Controller@controller',
+      'Controller',
+      'Method',
       [
         'id' => 1234
       ]
     );
 
     $this -> assertEquals(
-      'Controller@controller',
+      'Controller',
       $cd -> getController()
     );
 
@@ -45,8 +46,26 @@ class ControllerDataTest extends TestCase {
       $cd -> getController()
     );
   }
+  public function testGetMethod() {
+    $cd = new ControllerData('controller', 'method');
+    $this -> assertEquals(
+      'method',
+      $cd -> getMethod()
+    );
+  }
+  /**
+  * @depends testGetMethod
+  */
+  public function testSetMethod() {
+    $cd = new ControllerData();
+    $cd -> setMethod('method');
+    $this -> assertEquals(
+      'method',
+      $cd -> getMethod()
+    );
+  }
   public function testGetData() {
-    $cd = new ControllerData('', [
+    $cd = new ControllerData('', '', [
       'id' => 12345
     ]);
     $this -> assertEquals(

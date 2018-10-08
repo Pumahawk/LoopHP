@@ -22,14 +22,14 @@ class AppTest extends TestCase {
     };
   }
   public function testMatch() {
-    $cd = new ControllerData('controller', [
+    $cd = new ControllerData('controller', 'method', [
       'dato1' => 'dato1'
     ]);
     $appc = new AppConfiguration();
     $matchable = $this -> getMachable($cd);
     $app = new App($appc, $matchable);
 
-    $expected = new ControllerData('controller', [
+    $expected = new ControllerData('controller', 'method', [
       'dato1' => 'dato1'
     ]);
     $this -> assertEquals($expected, $app -> match());
