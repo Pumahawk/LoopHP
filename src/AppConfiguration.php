@@ -13,7 +13,8 @@ class AppConfiguration {
           'controller' => [],
           'template' => [],
           'api' => []
-        ]
+        ],
+        'composer' => null
       ]
     ];
   }
@@ -47,5 +48,12 @@ class AppConfiguration {
   }
   public function getApi() {
     return $this -> configuration['app']['paths']['api'];
+  }
+  public function setComposer(\Composer\Autoload\ClassLoader $composer) {
+    $this -> configuration['app']['composer'] = $composer;
+    return $this;
+  }
+  public function getComposer() {
+    return $this -> configuration['app']['composer'];
   }
 }

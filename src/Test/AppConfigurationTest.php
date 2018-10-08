@@ -14,7 +14,8 @@ class AppConfigurationTest extends TestCase {
           'controller' => [],
           'template' => [],
           'api' => []
-        ]
+        ],
+        'composer' => null
       ]
     ];
   }
@@ -150,6 +151,31 @@ class AppConfigurationTest extends TestCase {
     $this -> assertEquals(
       $expected,
       $conf -> getTemplate()
+    );
+  }
+  public function testSetComposer() {
+    $expected = $this -> getBaseConfigurationTest();
+    if(!isset($expected['app']['paths']['template'])) {
+      throw new \Exception('Errore test. Variabile $expected["app"]["paths"]["configurations"]["template"] non definita.');
+    }
+    $composer = require(__DIR__.'/../../vendor/autoload.php');
+    $expected['app']['composer'] = $composer;
+
+    $conf = new AppConfiguration;
+    $conf -> setComposer($composer);
+
+    $this -> assertEquals(
+      $expected,
+      $conf -> getConfiguration()
+    );
+  }
+  public function testGetComposer() {
+    $conf = new AppConfiguration;
+    $expected = require(__DIR__.'/../../vendor/autoload.php');
+    $conf -> setComposer($expected);
+    $this -> assertEquals(
+      $expected,
+      $conf -> getComposer()
     );
   }
 }
