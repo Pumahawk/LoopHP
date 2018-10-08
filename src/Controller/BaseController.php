@@ -5,15 +5,19 @@ namespace LoopHP\Controller;
 use LoopHP\ControllerData;
 
 use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Config\Loader\LoaderInterface;
 
 abstract class BaseController {
   protected $tEngine;
   protected $controllerData;
+  protected $loader;
 
   public function __construct(EngineInterface $templateEngine,
-                              ControllerData $controllerData) {
+                              ControllerData $controllerData,
+                              LoaderInterface $loader) {
     $this -> setTemplateEngine($templateEngine);
     $this -> controllerData = $controllerData;
+    $this -> loader = $loader;
   }
 
   public function setTemplateEngine(EngineInterface $templateEngine) {
@@ -26,5 +30,9 @@ abstract class BaseController {
 
   public function cData() : ControllerData {
     return $this -> controllerData;
+  }
+
+  public function config() {
+    return $this -> loader;
   }
 }
