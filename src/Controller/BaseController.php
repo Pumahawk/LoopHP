@@ -5,7 +5,7 @@ namespace LoopHP\Controller;
 use Symfony\Component\Templating\EngineInterface;
 
 abstract class BaseController {
-  private $tEngine;
+  protected $tEngine;
 
   public function __construct(EngineInterface $templateEngine) {
     $this -> setTemplateEngine($templateEngine);
