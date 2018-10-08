@@ -21,8 +21,7 @@ class App {
     $this -> match = $match;
   }
   public function start() {
-     // TODO gestire il path multiplo del template
-    $filesystemLoader = new FilesystemLoader($this -> configuration -> getTemplate()[0].'/%name%');
+    $filesystemLoader = new FilesystemLoader($this -> configuration -> getTemplate().'/%name%');
     $fileLocator = new FileLocator($this -> configuration -> getConfigurationPath());
     $engineInterface = new PhpEngine(new TemplateNameParser(), $filesystemLoader);
     $cData = new ControllerData();

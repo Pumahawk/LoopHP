@@ -11,7 +11,7 @@ class AppConfiguration {
       'app' => [
         'paths' => [
           'configurations' => [],
-          'template' => [],
+          'template' => '',
           'api' => []
         ],
         'composer' => null
@@ -28,11 +28,11 @@ class AppConfiguration {
   public function getConfigurationPath() : array {
     return $this -> configuration['app']['paths']['configurations'];
   }
-  public function addTemplate(string $path) {
-    $this -> configuration['app']['paths']['template'][] = $path;
+  public function setTemplate(string $path) {
+    $this -> configuration['app']['paths']['template'] = $path;
     return $this;
   }
-  public function getTemplate() : array {
+  public function getTemplate() : string {
     return $this -> configuration['app']['paths']['template'];
   }
   public function addApi(string $namespace, string $path) {

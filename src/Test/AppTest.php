@@ -80,7 +80,7 @@ class AppTest extends TestCase {
     $cd -> setController('Controller\\TestController');
     $cd -> setMethod('method');
     $appc = new AppConfiguration();
-    $appc -> addTemplate(__DIR__.'/../../resources/test/view');
+    $appc -> setTemplate(__DIR__.'/../../resources/test/view');
     $appc -> addConfigurationPath(__DIR__.'/../../resources/test/config');
     $appc -> addApi('Controller\\', __DIR__.'/../../resources/test/controller/');
     $appc -> setComposer(require(__DIR__.'/../../vendor/autoload.php'));

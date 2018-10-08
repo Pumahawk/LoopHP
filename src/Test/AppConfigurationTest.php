@@ -11,7 +11,7 @@ class AppConfigurationTest extends TestCase {
       'app' => [
         'paths' => [
           'configurations' => [],
-          'template' => [],
+          'template' => '',
           'api' => []
         ],
         'composer' => null
@@ -90,16 +90,16 @@ class AppConfigurationTest extends TestCase {
       $conf -> getApi()
     );
   }
-  public function testAddTemplate() {
+  public function testSetTemplate() {
     $expected = $this -> getBaseConfigurationTest();
     if(!isset($expected['app']['paths']['template'])) {
       throw new \Exception('Errore test. Variabile $expected["app"]["paths"]["configurations"]["template"] non definita.');
     }
 
-    $expected['app']['paths']['template'][] = 'new/path/template';
+    $expected['app']['paths']['template'] = 'new/path/template';
 
     $conf = new AppConfiguration;
-    $conf -> addTemplate('new/path/template');
+    $conf -> setTemplate('new/path/template');
 
     $this -> assertEquals(
       $expected,
@@ -109,13 +109,9 @@ class AppConfigurationTest extends TestCase {
   }
   public function testGetTemplate() {
     $conf = new AppConfiguration;
-    $expected = [
-      '/path1/template',
-      '/path2/template'
-    ];
+    $expected = '/path1/template';
     $conf
-      -> addTemplate('/path1/template')
-      -> addTemplate('/path2/template');
+      -> setTemplate('/path1/template');
     $this -> assertEquals(
       $expected,
       $conf -> getTemplate()
