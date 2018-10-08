@@ -2,81 +2,50 @@
 
 namespace LoopHP;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
-use Symfony\Component\Config\Definition\Processor;
-
-class AppConfiguration  implements ConfigurationInterface {
+class AppConfiguration {
   protected $configuration;
-  protected $composerObject;
 
-  public function getConfiguration() : array{
+  public function __construct() {
+    $this -> configuration = [
+      'app' => [
+        'paths' => [
+          'configurations' => [],
+          'controller' => [],
+          'template' => [],
+          'api' => []
+        ]
+      ]
+    ];
+  }
+  public function getConfiguration() {
     return $this -> configuration;
   }
-  public function setConfiguration(array $configuration) {
-    $processor = new Processor();
-    $this -> configuration = $processor->processConfiguration(
-        $this,
-        $configuration
-    );
+  public function addConfigurationPath(string $path) {
+    $this -> configuration['app']['paths']['configurations'][] = $path;
+    return $this;
   }
-
-  public function getConfigurationDefinition() {
-    $cd = new AppConfigurationDefinition();
-    $cd -> setConfiguration($this -> configuration);
-    return $cd;
+  public function getConfigurationPath() {
+    return $this -> configuration['app']['paths']['configurations'];
   }
-
-  public function setComposerObject($composerObject){
-    $this -> composerObject = $composerObject;
+  public function addController(string $path) {
+    $this -> configuration['app']['paths']['controller'][] = $path;
+    return $this;
   }
-  public function getComposerObject() {
-    return $this -> composerObject;
+  public function getController() {
+    return $this -> configuration['app']['paths']['controller'];
   }
-
-  public function __construct(array $configuration, $composerObject = null) {
-    $this -> setConfiguration($configuration);
-    $this -> setComposerObject($composerObject);
+  public function addTemplate(string $path) {
+    $this -> configuration['app']['paths']['template'][] = $path;
+    return $this;
   }
-
-  public function getConfigTreeBuilder() {
-    $treeBuilder = new TreeBuilder();
-    $rootNode = $treeBuilder->root('app');
-
-    $rootNode
-    -> children()
-      -> arrayNode('paths')
-        -> children()
-          -> arrayNode('configurations')
-            -> children()
-              -> scalarNode('configuration') -> end()
-              -> scalarNode('router') -> end()
-            -> end()
-          -> end()
-          -> arrayNode('resources')
-            -> children()
-              -> arrayNode('template')
-                -> scalarPrototype() -> end()
-              -> end()
-            -> end()
-          -> end()
-          -> arrayNode('source_code')
-            -> children()
-              -> arrayNode('controller')
-                -> scalarPrototype() -> end()
-              -> end()
-              -> arrayNode('api')
-                -> scalarPrototype() -> end()
-              -> end()
-            -> end()
-          -> end()
-        -> end()
-      -> end()
-      -> variableNode('composer') -> end()
-    -> end();
-
-
-
-    return $treeBuilder;
+  public function getTemplate() {
+    return $this -> configuration['app']['paths']['template'];
+  }
+  public function addApi(string $path) {
+    $this -> configuration['app']['paths']['api'][] = $path;
+    return $this;
+  }
+  public function getApi() {
+    return $this -> configuration['app']['paths']['api'];
   }
 }
