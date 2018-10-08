@@ -8,6 +8,10 @@ use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use LoopHP\Config\Loader\PhpLoader;
 use LoopHP\Config\Loader\YamlLoader;
+use Symfony\Component\Templating\Loader\FilesystemLoader;
+use Symfony\Component\Templating\PhpEngine;
+use Symfony\Component\Templating\TemplateNameParser;
+
 
 class App {
   protected $match;
@@ -17,11 +21,17 @@ class App {
     $this -> match = $match;
   }
   public function start() {
-    // TODO da testare
+     // TODO gestire il path multiplo del template
+    $filesystemLoader = new FilesystemLoader($this -> configuration -> getTemplate()[0].'/%name%');
+    $fileLocator = new FileLocator($this -> configuration -> getConfigurationPath());
+    $engineInterface = new PhpEngine(new TemplateNameParser(), $filesystemLoader);
+    $cData = new ControllerData();
+    $loader = new PhpLoader($fileLocator);
+
     $controllerData = $this -> match -> match();
     $controller = $controllerData -> getController();
     $method = $controllerData -> getMethod();
-    $obj = new $controller();
+    $obj = new $controller($engineInterface, $cData, $loader);
     $obj -> $method();
   }
   public function match() : ControllerData {

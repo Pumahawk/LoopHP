@@ -74,4 +74,19 @@ class AppTest extends TestCase {
     $this -> assertTrue($ver instanceof TestApi);
     $this -> assertEquals('test-api', $ver -> message());
   }
+  public function testStart() {
+    $this -> expectOutputString('ciao dal controller.');
+    $cd = new ControllerData();
+    $cd -> setController('Controller\\TestController');
+    $cd -> setMethod('method');
+    $appc = new AppConfiguration();
+    $appc -> addTemplate(__DIR__.'/../../resources/test/view');
+    $appc -> addConfigurationPath(__DIR__.'/../../resources/test/config');
+    $appc -> addApi('Controller\\', __DIR__.'/../../resources/test/controller/');
+    $appc -> setComposer(require(__DIR__.'/../../vendor/autoload.php'));
+    $matchable = $this -> getMachable($cd);
+    $app = new App($appc, $matchable);
+    $app -> setApiLoader();
+    $app -> start();
+  }
 }
