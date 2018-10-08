@@ -17,7 +17,12 @@ class App {
     $this -> match = $match;
   }
   public function start() {
-    // TODO
+    // TODO da testare
+    $controllerData = $this -> match -> match();
+    $controller = $controllerData -> getController();
+    $method = $controllerData -> getMethod();
+    $obj = new $controller();
+    $obj -> $method();
   }
   public function match() : ControllerData {
     return $this -> match -> match();
