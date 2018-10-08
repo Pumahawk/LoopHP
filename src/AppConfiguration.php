@@ -11,7 +11,6 @@ class AppConfiguration {
       'app' => [
         'paths' => [
           'configurations' => [],
-          'controller' => [],
           'template' => [],
           'api' => []
         ],
@@ -28,13 +27,6 @@ class AppConfiguration {
   }
   public function getConfigurationPath() : array {
     return $this -> configuration['app']['paths']['configurations'];
-  }
-  public function addController(string $path) {
-    $this -> configuration['app']['paths']['controller'][] = $path;
-    return $this;
-  }
-  public function getController() : array {
-    return $this -> configuration['app']['paths']['controller'];
   }
   public function addTemplate(string $path) {
     $this -> configuration['app']['paths']['template'][] = $path;

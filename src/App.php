@@ -30,4 +30,10 @@ class App {
     $delegatingLoader = new DelegatingLoader($loadResolver);
     return $delegatingLoader;
   }
+  public function setApiLoader() {
+    $template = $this -> configuration -> getApi();
+    foreach ($template as $namespace => $path ) {
+      $this -> configuration -> getComposer() -> addPsr4($namespace, $path);
+    }
+  }
 }

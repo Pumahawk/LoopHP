@@ -11,7 +11,6 @@ class AppConfigurationTest extends TestCase {
       'app' => [
         'paths' => [
           'configurations' => [],
-          'controller' => [],
           'template' => [],
           'api' => []
         ],
@@ -60,37 +59,6 @@ class AppConfigurationTest extends TestCase {
     );
   }
 
-  public function testAddController() {
-    $expected = $this -> getBaseConfigurationTest();
-    if(!isset($expected['app']['paths']['controller'])) {
-      throw new \Exception('Errore test. Variabile $expected["app"]["paths"]["configurations"]["controller"] non definita.');
-    }
-
-    $expected['app']['paths']['controller'][] = 'new/path/controller';
-
-    $conf = new AppConfiguration;
-    $conf -> addController('new/path/controller');
-
-    $this -> assertEquals(
-      $expected,
-      $conf -> getConfiguration()
-    );
-
-  }
-  public function testGetController() {
-    $conf = new AppConfiguration;
-    $expected = [
-      '/path1/controller',
-      '/path2/controller'
-    ];
-    $conf
-      -> addController('/path1/controller')
-      -> addController('/path2/controller');
-    $this -> assertEquals(
-      $expected,
-      $conf -> getController()
-    );
-  }
   public function testAddApi() {
     $expected = $this -> getBaseConfigurationTest();
     if(!isset($expected['app']['paths']['api'])) {

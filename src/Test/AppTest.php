@@ -7,6 +7,7 @@ use LoopHP\AppConfiguration;
 use LoopHP\ControllerData;
 use LoopHP\Matchable;
 use LoopHP\App;
+use Test\Api\TestApi;
 
 class AppTest extends TestCase {
   public function getMachable(ControllerData $data) {
@@ -60,5 +61,17 @@ class AppTest extends TestCase {
       ],
       $dataYAML
     );
+  }
+  public function testSetApiLoader() {
+    $cd = new ControllerData();
+    $appc = new AppConfiguration();
+    $appc -> addApi('Test\\Api\\', __DIR__.'/../../resources/test/api/');
+    $appc -> setComposer(require(__DIR__.'/../../vendor/autoload.php'));
+    $matchable = $this -> getMachable($cd);
+    $app = new App($appc, $matchable);
+    $app -> setApiLoader();
+    $ver = new TestApi();
+    $this -> assertTrue($ver instanceof TestApi);
+    $this -> assertEquals('test-api', $ver -> message());
   }
 }
