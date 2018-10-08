@@ -36,18 +36,29 @@ class AppTest extends TestCase {
   public function testGetConfigLoader() {
     $cd = new ControllerData();
     $appc = new AppConfiguration();
-    $appc -> addConfigurationPath(__DIR__.'/../../resources/test');
+    $appc -> addConfigurationPath(__DIR__.'/../../resources/test/config');
     $matchable = $this -> getMachable($cd);
     $app = new App($appc, $matchable);
     $loader = $app -> getConfigLoader();
-    $data = $loader -> load('configuration.php');
+    $dataPHP = $loader -> load('configuration.php');
     $this -> assertEquals(
       [
         'configuration' => [
+          'type' => 'php',
           'name' => 'LoopHP'
         ]
       ],
-      $data
+      $dataPHP
+    );
+    $dataYAML = $loader -> load('configuration.yaml');
+    $this -> assertEquals(
+      [
+        'configuration' => [
+          'type' => 'yaml',
+          'name' => 'LoopHP'
+        ]
+      ],
+      $dataYAML
     );
   }
 }
