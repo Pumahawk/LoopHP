@@ -43,8 +43,8 @@ class AppConfiguration {
   public function getTemplate() : array {
     return $this -> configuration['app']['paths']['template'];
   }
-  public function addApi(string $path) {
-    $this -> configuration['app']['paths']['api'][] = $path;
+  public function addApi(string $namespace, string $path) {
+    $this -> configuration['app']['paths']['api'][$namespace] = $path;
     return $this;
   }
   public function getApi() : array {

@@ -97,10 +97,10 @@ class AppConfigurationTest extends TestCase {
       throw new \Exception('Errore test. Variabile $expected["app"]["paths"]["configurations"]["api"] non definita.');
     }
 
-    $expected['app']['paths']['api'][] = 'new/path/api';
+    $expected['app']['paths']['api']['namespace'] = 'new/path/api';
 
     $conf = new AppConfiguration;
-    $conf -> addApi('new/path/api');
+    $conf -> addApi('namespace', 'new/path/api');
 
     $this -> assertEquals(
       $expected,
@@ -111,12 +111,12 @@ class AppConfigurationTest extends TestCase {
   public function testGetApi() {
     $conf = new AppConfiguration;
     $expected = [
-      '/path1/api',
-      '/path2/api'
+      'namespace1' => '/path1/api',
+      'namespace2' => '/path2/api'
     ];
     $conf
-      -> addApi('/path1/api')
-      -> addApi('/path2/api');
+      -> addApi('namespace1', '/path1/api')
+      -> addApi('namespace2', '/path2/api');
     $this -> assertEquals(
       $expected,
       $conf -> getApi()
