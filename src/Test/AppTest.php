@@ -8,6 +8,7 @@ use LoopHP\ControllerData;
 use LoopHP\Matchable;
 use LoopHP\App;
 use Test\Api\TestApi;
+use Symfony\Component\Routing\RouteCollection;
 
 class AppTest extends TestCase {
   public function getMachable(ControllerData $data) {
@@ -119,5 +120,7 @@ class AppTest extends TestCase {
       $data,
       "Impossibile leggere file di configurazione di tipo YAML"
     );
+    $data = $loader -> load('route/test0.route.yaml');
+    $this -> assertInstanceOf(RouteCollection::class, $data);
   }
 }

@@ -8,6 +8,8 @@ use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use LoopHP\Config\Loader\PhpLoader;
 use LoopHP\Config\Loader\YamlLoader;
+use LoopHP\Config\Loader\PhpRouterLoader;
+use LoopHP\Config\Loader\YamlRouterLoader;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\PhpEngine;
 use Symfony\Component\Templating\TemplateNameParser;
@@ -40,6 +42,8 @@ class App {
   public function getConfigLoader() : LoaderInterface {
     $fileLocator = new FileLocator($this -> configuration -> getConfigurationPath());
     $loadResolver = new LoaderResolver();
+    $loadResolver -> addLoader(new PhpRouterLoader($fileLocator));
+    $loadResolver -> addLoader(new YamlRouterLoader($fileLocator));
     $loadResolver -> addLoader(new PhpLoader($fileLocator));
     $loadResolver -> addLoader(new YamlLoader($fileLocator));
     $delegatingLoader = new DelegatingLoader($loadResolver);
