@@ -22,10 +22,9 @@ class App {
   }
   public function start() {
     $filesystemLoader = new FilesystemLoader($this -> configuration -> getTemplate().'/%name%');
-    $fileLocator = new FileLocator($this -> configuration -> getConfigurationPath());
     $engineInterface = new PhpEngine(new TemplateNameParser(), $filesystemLoader);
     $cData = new ControllerData();
-    $loader = new PhpLoader($fileLocator);
+    $loader = $this -> getConfigLoader();
 
     $controllerData = $this -> match -> match();
     $controller = $controllerData -> getController();
