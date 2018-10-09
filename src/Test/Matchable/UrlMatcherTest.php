@@ -15,13 +15,15 @@ class UrlMatcherTest extends TestCase {
     $routes = new RouteCollection();
     $context = new RequestContext('/');
     $route = new Route('/url.html', [
-      'controller' => 'controller@data',
-      'data' => []
+      'controller' => 'controller@data'
     ]);
     $routes -> add('key', $route);
     $urlm = new UrlMatcher($routes, $context, '/url.html');
     $cd = $urlm -> match();
-    $expected = new ControllerData('controller', 'data', array());
+    $expected = new ControllerData('controller', 'data', array(
+      'controller' => 'controller@data',
+      '_route' => 'key'
+    ));
 
     $this -> assertEquals(
       $expected,

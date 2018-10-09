@@ -21,7 +21,7 @@ class UrlMatcher implements Matchable {
     $matcher = new UrlMatcherSymfony($this -> collection, $this -> context);
     $parameters = $matcher->match($this -> url);
     $controller = explode('@', $parameters['controller']);
-    $cd = new ControllerData($controller[0], $controller[1], $parameters['data']);
+    $cd = new ControllerData($controller[0], $controller[1], $parameters);
     return $cd;
   }
 }
