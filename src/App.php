@@ -19,10 +19,14 @@ class App {
   protected $match;
   protected $configuration;
   protected $loader;
-  public function __construct(AppConfiguration $configuration, Matchable $match) {
+  public function __construct(AppConfiguration $configuration, $match = null) {
     $this -> configuration = $configuration;
     $this -> match = $match;
     $this -> loader = $this -> getConfigLoader();
+  }
+
+  public function setMatch(Matchable $match) {
+    $this -> match = $match;
   }
   public function start() {
     $filesystemLoader = new FilesystemLoader($this -> configuration -> getTemplate().'/%name%');
