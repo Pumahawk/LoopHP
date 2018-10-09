@@ -89,4 +89,35 @@ class AppTest extends TestCase {
     $app -> setApiLoader();
     $app -> start();
   }
+  public function testLoader() {
+    $cd = new ControllerData();
+    $appc = new AppConfiguration();
+    $appc -> addConfigurationPath( __DIR__.'/../../resources/test/config');
+    $appc -> setComposer(require(__DIR__.'/../../vendor/autoload.php'));
+    $matchable = $this -> getMachable($cd);
+    $app = new App($appc, $matchable);
+    $loader = $app -> loader();
+    $data = $loader -> load('configuration.php');
+    $this -> assertEquals(
+      [
+        'configuration' => [
+          'type' => 'php',
+          'name' => 'LoopHP'
+        ]
+      ],
+      $data,
+      "Impossibile leggere file di configurazione di tipo PHP"
+    );
+    $data = $loader -> load('configuration.yaml');
+    $this -> assertEquals(
+      [
+        'configuration' => [
+          'type' => 'yaml',
+          'name' => 'LoopHP'
+        ]
+      ],
+      $data,
+      "Impossibile leggere file di configurazione di tipo YAML"
+    );
+  }
 }

@@ -16,15 +16,17 @@ use Symfony\Component\Templating\TemplateNameParser;
 class App {
   protected $match;
   protected $configuration;
+  protected $loader;
   public function __construct(AppConfiguration $configuration, Matchable $match) {
     $this -> configuration = $configuration;
     $this -> match = $match;
+    $this -> loader = $this -> getConfigLoader();
   }
   public function start() {
     $filesystemLoader = new FilesystemLoader($this -> configuration -> getTemplate().'/%name%');
     $engineInterface = new PhpEngine(new TemplateNameParser(), $filesystemLoader);
     $cData = new ControllerData();
-    $loader = $this -> getConfigLoader();
+    $loader = $this -> loader;
 
     $controllerData = $this -> match -> match();
     $controller = $controllerData -> getController();
@@ -48,5 +50,8 @@ class App {
     foreach ($template as $namespace => $path ) {
       $this -> configuration -> getComposer() -> addPsr4($namespace, $path);
     }
+  }
+  public function loader() {
+    return $this -> loader;
   }
 }
