@@ -35,4 +35,12 @@ abstract class BaseController {
   public function config() {
     return $this -> loader;
   }
+
+  public function params(string ... $keys) {
+    $value = $this -> controllerData -> getData();
+    foreach ($keys as $key) {
+      $value = $value[$key];
+    }
+    return $value;
+  }
 }

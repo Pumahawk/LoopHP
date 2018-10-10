@@ -21,7 +21,16 @@ class BaseControllerTest extends TestCase {
     $filesystemLoader = new FilesystemLoader(__DIR__.'/../../../resources/test/views/%name%');
     $fileLocator = new FileLocator(__DIR__.'/../../../resources/test/config');
     $engineInterface = new PhpEngine(new TemplateNameParser(), $filesystemLoader);
-    $cData = new ControllerData();
+    $cData = new ControllerData(
+      'controller',
+      'method',
+      [
+        'key0' => 'value0',
+        'key1' => [
+          'key2' => 'value2'
+        ]
+      ]
+    );
     $loader = new PhpLoader($fileLocator);
     return new class($engineInterface, $cData, $loader) extends BaseController {
 
@@ -42,5 +51,26 @@ class BaseControllerTest extends TestCase {
       ],
       $controller -> config() -> load('configuration.php')
     );
+  }
+
+  public function testGetParams() {
+    $controller = $this -> getBaseController();
+    $value = $controller -> params();
+    $this -> assertEquals(
+      [
+        'key0' => 'value0',
+        'key1' => [
+          'key2' => 'value2'
+        ]
+      ]
+      , $value);
+    $value = $controller -> params('key0');
+    $this -> assertEquals('value0', $value);
+    $value = $controller -> params('key1');
+    $this -> assertEquals([
+      'key2' => 'value2'
+    ], $value);
+    $value = $controller -> params('key1','key2');
+    $this -> assertEquals('value2', $value);
   }
 }
