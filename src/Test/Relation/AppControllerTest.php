@@ -57,4 +57,13 @@ class AppControllerTest extends TestCase {
     $app -> setApiLoader();
     $app -> start();
   }
+  public function testPassingData() {
+    $this -> expectOutputString('dato');
+    $match = $this -> getMachable('readData', ['keydata' => 'dato']);
+    $appc = $this -> getConfiguration();
+
+    $app = new App($appc, $match);
+    $app -> setApiLoader();
+    $app -> start();
+  }
 }

@@ -59,13 +59,12 @@ class App {
     $this -> match = $match;
   }
   public function start() {
-    $cData = new ControllerData();
     $loader = $this -> getConfigLoader();
 
     $controllerData = $this -> match -> match();
     $controller = $controllerData -> getController();
     $method = $controllerData -> getMethod();
-    $obj = new $controller($this -> templateEngine, $cData, $loader);
+    $obj = new $controller($this -> templateEngine, $controllerData, $loader);
     $obj -> $method();
   }
   public function match() : ControllerData {

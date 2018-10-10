@@ -14,4 +14,7 @@ class ControllerRelation extends BaseController {
   public function renderTemplate() {
     echo $this -> tEngine() -> render('template.php');
   }
+  public function readData() {
+    echo $this -> cData() -> getData()['keydata'];
+  }
 }
