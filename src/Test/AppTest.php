@@ -123,4 +123,15 @@ class AppTest extends TestCase {
     $data = $loader -> load('route/test0.route.yaml');
     $this -> assertInstanceOf(RouteCollection::class, $data);
   }
+
+  public function testTemplateEngine() {
+    $cd = new ControllerData();
+    $appc = new AppConfiguration();
+    $appc -> setTemplate(__DIR__.'/../../resources/test/views');
+    $matchable = $this -> getMachable($cd);
+    $app = new App($appc, $matchable);
+    $outTemplate = $app -> template() -> render('template.php');
+
+    $this -> assertEquals('ciao mondo!', $outTemplate);
+  }
 }
