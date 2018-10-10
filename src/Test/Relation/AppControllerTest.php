@@ -13,7 +13,7 @@ class AppControllerTest extends TestCase {
   public function getConfiguration() {
     $conf = new AppConfiguration();
     $conf
-      -> setTemplate(__DIR__.'/../../../resources/test/view')
+      -> setTemplate(__DIR__.'/../../../resources/test/views')
       -> addConfigurationPath(__DIR__.'/../../../resources/test/config')
       -> setComposer(require(__DIR__.'/../../../vendor/autoload.php'))
       -> addApi('Controller\\', __DIR__.'/../../../resources/test/controller');
@@ -33,6 +33,24 @@ class AppControllerTest extends TestCase {
   public function testExecuteController() {
     $this -> expectOutputString('Hallo world!');
     $match = $this -> getMachable('hallo');
+    $appc = $this -> getConfiguration();
+
+    $app = new App($appc, $match);
+    $app -> setApiLoader();
+    $app -> start();
+  }
+  public function testReadConfigurationFile() {
+    $this -> expectOutputString('yaml');
+    $match = $this -> getMachable('readConfig');
+    $appc = $this -> getConfiguration();
+
+    $app = new App($appc, $match);
+    $app -> setApiLoader();
+    $app -> start();
+  }
+  public function testRenderTemplate() {
+    $this -> expectOutputString('ciao mondo!');
+    $match = $this -> getMachable('renderTemplate');
     $appc = $this -> getConfiguration();
 
     $app = new App($appc, $match);
