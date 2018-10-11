@@ -10,6 +10,7 @@ use LoopHP\Routing\Route;
 use LoopHP\Routing\RouteGroup;
 use LoopHP\Matchable\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class SimpleUseTest extends TestCase {
   public $app;
@@ -54,6 +55,14 @@ class SimpleUseTest extends TestCase {
     $this -> expectOutputString('123');
 
     $this -> app -> getMatch() -> setUrl('/page3/123');
+    $this -> app -> start();
+  }
+
+
+  public function testVariableRoutingError() {
+    $this->expectException(ResourceNotFoundException::class);
+
+    $this -> app -> getMatch() -> setUrl('/page3/12s3');
     $this -> app -> start();
   }
 }
