@@ -58,6 +58,9 @@ class App {
   public function setMatch(Matchable $match) {
     $this -> match = $match;
   }
+  public function getMatch() {
+    return $this -> match;
+  }
   public function start() {
     $loader = $this -> getConfigLoader();
 

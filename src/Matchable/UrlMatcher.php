@@ -24,4 +24,10 @@ class UrlMatcher implements Matchable {
     $cd = new ControllerData($controller[0], $controller[1], $parameters);
     return $cd;
   }
+  public function setUrl(string $url) {
+    $this -> url = $url;
+  }
+  public function url() {
+    return $this -> url;
+  }
 }
