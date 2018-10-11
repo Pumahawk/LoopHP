@@ -13,10 +13,10 @@ class AppControllerTest extends TestCase {
   public function getConfiguration() {
     $conf = new AppConfiguration();
     $conf
-      -> setTemplate(__DIR__.'/../../../resources/test/views')
-      -> addConfigurationPath(__DIR__.'/../../../resources/test/config')
-      -> setComposer(require(__DIR__.'/../../../vendor/autoload.php'))
-      -> addApi('Controller\\', __DIR__.'/../../../resources/test/controller');
+      -> setTemplate(__DIR__.'/../../resources/test/views')
+      -> addConfigurationPath(__DIR__.'/../../resources/test/config')
+      -> setComposer(require(__DIR__.'/../../vendor/autoload.php'))
+      -> addApi('Controller\\', __DIR__.'/../../resources/test/controller');
     return $conf;
   }
   public function getMachable(string $method, array $data = array()) {
