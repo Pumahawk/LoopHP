@@ -55,7 +55,7 @@ class RouteGroup {
     foreach ($this -> routeList as $name => $route) {
       $data = $route -> getControllerData() -> getData();
       $data['controller'] = $route -> getControllerData() -> getController() . '@' . $route -> getControllerData() -> getMethod();
-      $syRoute = new SyRoute($route -> pattern(), $data);
+      $syRoute = new SyRoute($route -> pattern(), $data, $route -> getRequirements());
       $routeCollection -> add($name, $syRoute);
     }
     $routeCollection -> addNamePrefix($this -> name . '.');
@@ -70,7 +70,7 @@ class RouteGroup {
     $list = $group -> all();
 
     foreach ($list as $name => $route) {
-      $this -> add(new Route($groupName . '.' . $route -> name(), $groupPattern . $route -> pattern(), $route -> getControllerData()));
+      $this -> add(new Route($groupName . '.' . $route -> name(), $groupPattern . $route -> pattern(), $route -> getControllerData(), $route -> getRequirements()));
     }
   }
 }
