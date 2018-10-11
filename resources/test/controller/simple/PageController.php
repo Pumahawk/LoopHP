@@ -10,4 +10,7 @@ class PageController extends BaseController {
   public function page2() {
     echo 'page2';
   }
+  public function page3() {
+    echo($this -> params('value'));
+  }
 }

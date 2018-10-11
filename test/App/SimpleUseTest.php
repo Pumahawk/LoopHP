@@ -28,6 +28,7 @@ class SimpleUseTest extends TestCase {
     $routeCollection = new RouteGroup();
     $routeCollection -> add(new Route('page1', '/page1', new ControllerData('Controller\\PageController', 'page1')));
     $routeCollection -> add(new Route('page2', '/page2', new ControllerData('Controller\\PageController', 'page2')));
+    $routeCollection -> add(new Route('page3', '/page3/{value}', new ControllerData('Controller\\PageController', 'page3')));
 
     $match = new UrlMatcher($routeCollection -> getRouteCollection(), new RequestContext('/'));
 
@@ -42,6 +43,13 @@ class SimpleUseTest extends TestCase {
     $this -> expectOutputString('page1');
 
     $this -> app -> getMatch() -> setUrl('/page1');
+    $this -> app -> start();
+  }
+
+  public function testVariableRouting() {
+    $this -> expectOutputString('123');
+
+    $this -> app -> getMatch() -> setUrl('/page3/123');
     $this -> app -> start();
   }
 }
