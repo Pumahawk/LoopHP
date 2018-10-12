@@ -15,6 +15,7 @@ use Symfony\Component\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\PhpEngine;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Templating\DelegatingEngine;
+use Symfony\Component\Templating\Helper\SlotsHelper;
 use Symfony\Component\Templating\TemplateNameParser;
 
 
@@ -30,7 +31,9 @@ class App {
     $this -> templateEngine = new DelegatingEngine();
 
     $filesystemLoader = new FilesystemLoader($this -> configuration -> getTemplate().'/%name%');
-    $this -> templateEngine -> addEngine(new PhpEngine(new TemplateNameParser(), $filesystemLoader));
+    $phpEngine = new PhpEngine(new TemplateNameParser(), $filesystemLoader);
+    $phpEngine -> set(new SlotsHelper());
+    $this -> templateEngine -> addEngine($phpEngine);
 
     $fileLocator = new FileLocator($this -> configuration -> getConfigurationPath());
     $loadResolver = new LoaderResolver();
