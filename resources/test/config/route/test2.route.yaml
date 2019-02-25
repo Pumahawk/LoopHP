@@ -1,0 +1,8 @@
+router:
+  - name: group
+    pattern: /simple
+    address:
+      - name: path1
+        pattern: /use1
+        data:
+          controller: Controller\PageController@page1

@@ -18,6 +18,14 @@ use Symfony\Component\Templating\DelegatingEngine;
 use Symfony\Component\Templating\Helper\SlotsHelper;
 use Symfony\Component\Templating\TemplateNameParser;
 
+/**
+  * Classe principale di LoopHP.
+  * 
+  * Permette di inizializzare una applicazione con la creazione di un oggeto di tipo
+  * App a cui viene passato un oggetto di configurazione di tipo AppConfiguration e
+  * un oggetto che implementa Matchable.
+  * Il metodo start avvia l'esecuzione dell'applicazione.
+*/
 
 class App {
   protected $match;
