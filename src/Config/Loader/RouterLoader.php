@@ -16,9 +16,8 @@ abstract class RouterLoader extends FileLoader {
 
   public function processRouterConfiguration(array $routerData) {
     $process = new Processor();
-    $routerKit = new RouterKit();
     $process -> processConfiguration(new RouterConfiguration(), $routerData);
-    $routerData = $routerKit -> normalize($routerData);
+    $routerData = RouterKit::normalize($routerData);
     return $routerData;
   }
 }

@@ -12,13 +12,13 @@ use Symfony\Component\Routing\Route;
 */
 
 class RouterKit {
-  public function normalize(array $data, string $prefix = '') :  RouteCollection {
+  public static function normalize(array $data, string $prefix = '') :  RouteCollection {
     // TODO Add Link functionality
     $routes = new RouteCollection();
     $data = $data['router'] ?? $data;
     foreach ($data as $key => $record) {
       if(isset($record['address'])) {
-        $newCollection = $this -> normalize($record['address'], $record['pattern']);
+        $newCollection = RouterKit::normalize($record['address'], $record['pattern']);
         $newCollection -> addNamePrefix($record['name'].'.');
         $routes -> addCollection($newCollection);
       } else {

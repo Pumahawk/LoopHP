@@ -17,7 +17,6 @@ class PHPRouterLoader extends RouterLoader {
     return $data;
   }
   public function supports($resource, $type = null) {
-    $routerKit = new RouterKit();
     $pathinfo = pathinfo($resource);
     $ext1 = $pathinfo['extension'];
     $ext2 = pathinfo($pathinfo['filename'], PATHINFO_EXTENSION);

@@ -14,8 +14,7 @@ final class RouterKitTest extends TestCase {
   * @dataProvider getDataNormalizeTest
   */
   public function testNormalize($expected, $data) {
-    $routerKit = new RouterKit();
-    $routeCollection = $routerKit -> normalize($data);
+    $routeCollection = RouterKit::normalize($data);
     $this -> assertEquals($expected, $this -> routeCollectionToArray($routeCollection));
   }
 
