@@ -7,6 +7,10 @@ use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Route;
 
+/**
+  * Classe contenente metodi di supporto per la gestione dei dati sui router.
+*/
+
 class RouterKit {
   public function normalize(array $data, string $prefix = '') :  RouteCollection {
     // TODO Add Link functionality

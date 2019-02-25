@@ -9,6 +9,14 @@ use Symfony\Component\Config\Definition\ArrayNode;
 use Symfony\Component\Config\Definition\Builder\ScalarNodeDefinition;
 use Symfony\Component\Config\Definition\Processor;
 
+/**
+  * Modello dei file di configurazione dei router.
+  *
+  * Implementata l'interfaccia ConfigurationInterface come spiegato nella documentazione
+  * del componente Config di Symfony per riconoscere una truttura dati accettabile per 
+  * per la creazione dei router.
+*/
+
 class RouterConfiguration  implements ConfigurationInterface {
 
   public function getConfigTreeBuilder() {
