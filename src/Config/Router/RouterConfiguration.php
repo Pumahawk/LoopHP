@@ -18,12 +18,15 @@ class RouterConfiguration  implements ConfigurationInterface {
     $dataNode = new ArrayNodeDefinition('data');
     $dataNode -> children()
       -> scalarNode('controller');
+    $requirementsNode = new ArrayNodeDefinition('requirements');
+    $requirementsNode -> ignoreExtraKeys();
     $addressNode = new ArrayNodeDefinition('address');
     $addressNode
       -> arrayPrototype()
         -> append($patternNode)
         -> append(new ScalarNodeDefinition('name'))
         -> append($dataNode)
+        -> append($requirementsNode)
         -> children()
           -> variableNode('address')
             -> validate() -> always(function($var) use ($addressNode){
@@ -39,6 +42,7 @@ class RouterConfiguration  implements ConfigurationInterface {
     -> append($patternNode)
     -> append(new ScalarNodeDefinition('name'))
     -> append($dataNode)
+    -> append($requirementsNode)
     -> append($addressNode);
     return $treeBuilder;
   }

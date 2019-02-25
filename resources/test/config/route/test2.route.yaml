@@ -6,3 +6,9 @@ router:
         pattern: /use1
         data:
           controller: Controller\PageController@page1
+      - name: path2
+        pattern: number/{number}
+        data: 
+          controller: Controller\PageController@number
+        requirements: 
+          number: "[0-9]+"

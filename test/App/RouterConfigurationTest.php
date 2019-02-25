@@ -41,4 +41,12 @@ class RouterConfigurationTest extends TestCase {
     $this -> app -> getMatch() -> setUrl('/simple/use1');
     $this -> app -> start();
   }
+  
+  public function testMatchNumber() {
+    $this -> expectOutputString('1234321');
+    
+    $this -> app -> setMatch(new UrlMatcher($this -> app -> loader() -> import('route/test2.route.yaml'), new RequestContext('/')));
+    $this -> app -> getMatch() -> setUrl('/simple/number/1234321');
+    $this -> app -> start();
+  }
 }
