@@ -5,13 +5,8 @@ namespace LoopHP\Test;
 use PHPUnit\Framework\TestCase;
 use LoopHP\App;
 use LoopHP\AppConfiguration;
-use LoopHP\ControllerData;
-use LoopHP\Routing\Route;
-use LoopHP\Routing\RouteGroup;
-use LoopHP\Config\Router\RouterKit;
 use LoopHP\Matchable\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
-use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class RouterConfigurationTest extends TestCase {
   public $app;

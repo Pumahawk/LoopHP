@@ -62,7 +62,7 @@ class App {
   }
 
   // TODO Da testare
-  public function addConfigLoader(LoaderResovlerInterface $loader) {
+  public function addConfigLoader(LoaderResolverInterface $loader) {
     $this -> loaderResolver -> addLoader($loader);
   }
 

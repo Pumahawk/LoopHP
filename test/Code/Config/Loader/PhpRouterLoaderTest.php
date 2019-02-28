@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Config\Loader\FileLoader;
 use LoopHP\Config\Loader\PhpRouterLoader;
 use LoopHP\Test\Config\Router\RouterKitTest;
 use Symfony\Component\Config\FileLocator;

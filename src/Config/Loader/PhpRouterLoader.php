@@ -2,9 +2,6 @@
 
 namespace LoopHP\Config\Loader;
 
-use Symfony\Component\Config\Loader\FileLoader;
-use LoopHP\Config\Router\RouterKit;
-
 class PHPRouterLoader extends RouterLoader {
 
   public function load($resource, $type = null) {
