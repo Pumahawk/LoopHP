@@ -19,4 +19,8 @@ class Controller extends BaseController {
     ];
     echo $this -> tEngine() -> render('product.php', $data);
   }
+  public function dinamicOutput() {
+    $id = $this -> params('number');
+    echo 'key: '.$id;
+  }
 }

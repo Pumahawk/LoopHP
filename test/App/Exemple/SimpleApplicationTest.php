@@ -29,6 +29,10 @@ class SimpleApplicationTest extends TestCase {
     $routeGroup -> add(new Route('home', '/home', new ControllerData('C\\Controller', 'home')));
     $routeGroup -> add(new Route('homeTemplate', '/homeTemplate', new ControllerData('C\\Controller', 'homeTemplate')));
     $routeGroup -> add(new Route('productTemplate', '/productTemplate', new ControllerData('C\\Controller', 'productTemplate')));
+    $routeGroup -> add(new Route('dinamicOutput', '/key/{number}', new ControllerData('C\\Controller', 'dinamicOutput'), 
+    [
+      'number' => '[0-9]+'
+    ]));
     
     $matcher = new UrlMatcher($routeGroup -> getRouteCollection(), new RequestContext('/'));
     
@@ -63,6 +67,15 @@ class SimpleApplicationTest extends TestCase {
     
     $this -> expectOutputString(file_get_contents(__DIR__.'/../../../resources/test/exemple/simple_application/out/productTemplate.html'));
     $app -> getMatch() -> setUrl('/productTemplate');
+    $app -> start();
+  }
+  
+  /**
+    * @depends testConfigurationApp
+  */
+  public function testDinamicUrl($app) {
+    $this -> expectOutputString('key: 54321');
+    $app -> getMatch() -> setUrl('/key/54321');
     $app -> start();
   }
 }
