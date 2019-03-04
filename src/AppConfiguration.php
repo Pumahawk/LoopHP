@@ -3,6 +3,15 @@
 namespace LoopHP;
 use Composer\Autoload\ClassLoader;
 
+/**
+ * Oggetto che facilita la configurazione di un oggetto LoopHP\App.
+ * 
+ * La classe si occupa della gestione della struttura dati che mantiene
+ * le informazioni sulla configurazione di una applicazioni e fornisce i
+ * metodi corretti per l'ottenimento di tutti i loro valori.
+ * 
+ */
+
 class AppConfiguration {
   protected $configuration;
 

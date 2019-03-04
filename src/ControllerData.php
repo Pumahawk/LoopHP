@@ -2,6 +2,12 @@
 
 namespace LoopHP;
 
+/**
+ * Classe utilizatta dall'applicazione per il lancio del controller e del metodo associato.
+ * Vengono memorizzate informazioni aggiuntive nell'attributo $data che possono essere
+ * utilizzate successivamente dall'applicazione.
+ */
+
 class ControllerData {
   protected $controller;
   protected $method;
