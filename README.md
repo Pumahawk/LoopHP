@@ -13,7 +13,7 @@ purpose e questo gli permette di adattarsi a diversi contesti.
 
 Le componenti princiapli di questa libreria sono:
 * App
-* AppConfigration
+* AppConfiguration
 * Matchable
 
 Tutte le precedenti componenti devono essere istanziate nella maniera opportuna per poter funzionare.
