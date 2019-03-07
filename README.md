@@ -4,6 +4,8 @@ Libreria general purpose per la creazione e configurazione di applicazioni web u
 LoopHP e' stato creato utilizzando i componenti principali di Symfony e grazie alla sua facile configurazione e' possibile
 creare nuove applicazioni web oppure estendere applicazioni gia esistenti migliorandone la portabilita'.
 
+Si raccomanda di leggere la [Wiki](https://github.com/Pumahawk/LoopHP/wiki).
+
 ---
 
 # Utilizzo
